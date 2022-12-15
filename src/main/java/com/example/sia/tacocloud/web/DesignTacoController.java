@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
@@ -15,7 +16,10 @@ import org.springframework.validation.Errors;
 import lombok.extern.slf4j.Slf4j;
 
 import com.example.sia.tacocloud.Ingredient;
+import com.example.sia.tacocloud.Taco;
 import com.example.sia.tacocloud.Ingredient.Type;
+
+import jakarta.validation.Valid;
 
 
 
@@ -46,6 +50,7 @@ public class DesignTacoController {
         }        
 
         // model.addAttribute("design", new Taco());
+        model.addAttribute("design", new Taco());
 
         return "design";
 
@@ -57,6 +62,15 @@ public class DesignTacoController {
             .stream()
             .filter(x -> x.getType().equals(type))
             .collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public String processDesign(Taco design) {
+
+        System.out.println("Reached here");
+        log.info("Processing Desing: " + design);
+        // return "redirect:/orders/current";
+        return "redirect:/";
     }
 
 }
