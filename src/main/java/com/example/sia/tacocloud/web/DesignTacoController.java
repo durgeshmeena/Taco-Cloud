@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.example.sia.tacocloud.Ingredient;
 import com.example.sia.tacocloud.Taco;
 import com.example.sia.tacocloud.Ingredient.Type;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import jakarta.validation.Valid;
 
@@ -50,7 +51,7 @@ public class DesignTacoController {
         }        
 
         // model.addAttribute("design", new Taco());
-        model.addAttribute("design", new Taco());
+        model.addAttribute("taco", new Taco());
 
         return "design";
 
@@ -65,12 +66,18 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(Taco design) {
+    public String processDesign(@Valid Taco taco, Errors errors) {
 
-        System.out.println("Reached here");
-        log.info("Processing Desing: " + design);
-        // return "redirect:/orders/current";
-        return "redirect:/";
+        if(errors.hasErrors()) {
+            System.out.println("\nerror occured\n" + errors);
+            return "design";
+            // return "redirect:/design";
+        }
+
+        // System.out.println("\nReached here\n");
+        log.info("Processing Desing: " + taco);
+        return "redirect:/orders/current";
+       
     }
 
 }
