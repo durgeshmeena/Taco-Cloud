@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/orders")
 public class OrderController {
     
-    @GetMapping
+    @GetMapping("/current")
     public String orderForm(Model model) {
         model.addAttribute("order", new Order());
         return "orderForm";

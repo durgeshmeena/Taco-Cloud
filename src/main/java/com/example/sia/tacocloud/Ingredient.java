@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 // import lombok.RequiredArgsConstructor;
 
-@Data
+
 // @RequiredArgsConstructor
-@AllArgsConstructor
+// @AllArgsConstructor
+@Data
 public class Ingredient {
     
     private final String id;
