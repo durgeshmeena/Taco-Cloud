@@ -5,17 +5,14 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.event.annotation.AfterTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
-
-
-
 
 
 
@@ -26,22 +23,20 @@ public class HomePageBrowserTest {
     private int port;
     public static HtmlUnitDriver browser;
 
-    @BeforeTestClass
+    @BeforeAll
     public static void setup() {
         browser = new HtmlUnitDriver();
-
         browser.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
     }
 
-    @AfterTestClass
+    @AfterAll
     public static void teardown() {
         browser.quit();
     }
     
     @Test
     public void testHomePage() {
-        String homePage = "https://localhost:" + port;
+        String homePage = "http://localhost:" + port;
         browser.get(homePage);
 
         String titleText = browser.getTitle();
